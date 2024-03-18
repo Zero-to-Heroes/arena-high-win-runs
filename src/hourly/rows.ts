@@ -49,6 +49,7 @@ const performRowsProcessing = async (
 			WHERE creationDate >= ?
 			AND creationDate < ?
 			AND wins >= 10
+			AND allowGameShare = 1
 		`;
 		console.log('running query', queryStr);
 		const query = connection.query(queryStr, [startDate, endDate]);
