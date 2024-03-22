@@ -8,8 +8,10 @@ export const filterRuns = (input: readonly HighWinRunsInfo[]): readonly ArenaRun
 		(run: ArenaRunInfo) => run.playerClass,
 	)(allRuns);
 	const result: readonly ArenaRunInfo[] = Object.values(runsByClass)
-		.map((runs) => [...runs].sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime()))
+		.map((runs) =>
+			[...runs].sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime()),
+		)
 		.flatMap((runs) => runs.slice(0, 100))
-		.sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
+		.sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime());
 	return result;
 };
